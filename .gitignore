@@ -6,3 +6,6 @@ __pycache__/
 .vscode/
 .venv/
 bobb_venv/
+utils/tests/keys/
+keys/
+config/config.json
