@@ -1,0 +1,14 @@
+{
+  "satellites": [
+    {"location": "Valencia", "ip": "2001:0000:130F:0000:0000:09C0:876A:130B", "function": "disaster-imaging"},
+    {"location": "Madrid", "ip": "2001:0000:130F:0000:0000:09C0:876A:130C", "function": "disaster-imaging"},
+    {"location": "Barcelona", "ip": "2001:0000:130F:0000:0000:09C0:876A:130D", "function": "disaster-imaging"},
+    {"location": "Sevilla", "ip": "2001:0000:130F:0000:0000:09C0:876A:130E", "function": "disaster-imaging"},
+    {"location": "Zaragoza", "ip": "2001:0000:130F:0000:0000:09C0:876A:130F", "function": "disaster-imaging"},
+    {"location": "Málaga", "ip": "2001:0000:130F:0000:0000:09C0:876A:1310", "function": "disaster-imaging"},
+    {"location": "Murcia", "ip": "2001:0000:130F:0000:0000:09C0:876A:1311", "function": "disaster-imaging"},
+    {"location": "Palma de Mallorca", "ip": "2001:0000:130F:0000:0000:09C0:876A:1312", "function": "disaster-imaging"},
+    {"location": "Las Palmas de Gran Canaria", "ip": "2001:0000:130F:0000:0000:09C0:876A:1313", "function": "disaster-imaging"},
+    {"location": "Bilbao", "ip": "2001:0000:130F:0000:0000:09C0:876A:1314", "function": "disaster-imaging"}
+  ]
+}
