@@ -28,9 +28,9 @@ def get_satellites():
 
 @router.route('/v1/satellites/<string:ip>/images', methods=['POST'])
 def capture_image(ip):
-    # middleware = check_headers()
-    # if middleware is not True:
-    #     return middleware
+    middleware = check_headers()
+    if middleware is not True:
+        return middleware
 
     satellites = read_satellites_from_json()
 
