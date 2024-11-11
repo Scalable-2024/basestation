@@ -125,11 +125,17 @@ These configurations ensure a balance between efficiency and security, suitable 
 - **generate_keys(private_key_filename, public_key_filename)**: Generates an X25519 key pair, saving them as PEM files for secure exchange.
 
 ### 2. `data_encryption.py`
-- **derive_shared_key(private_key_filename, peer_public_key_filename)**: Derives a shared symmetric AES key based on a private key and peer’s public key.
+- **derive_shared_key(private_key_filename, peer_public_key_filename)**: Derives a shared symmetric AES key based on a private key file and peer’s public key file.
+- **create_shared_key(private_key: x25519.X25519PrivateKey, peer_public_key: x25519.X25519PublicKey) -> bytes**: Creates a shared symmetric AES key based on a private key value and peer’s public key value.
 - **encrypt_data(data, key)**: Encrypts data using AES-GCM with a derived key and unique IV.
 - **decrypt_data(encrypted_data, key)**: Decrypts AES-GCM encrypted data.
 - **encrypt_large_file(file_path, key, output_dir, chunk_size)**: Splits, encrypts, and saves a large file in encrypted chunks (configurable `chunk_size`).
 - **reassemble_file_from_chunks(output_file, chunk_dir, key)**: Reassembles and decrypts a file from encrypted chunks, recreating the original file.
+- **encrypt_chunk(chunk_data: bytes, key: bytes) -> tuple**:Encrypts a single data chunk with AES-GCM and returns both the IV and encrypted data.
+- **decrypt_chunk(iv: bytes, encrypted_chunk: bytes, key: bytes) -> bytes**: Decrypts a single encrypted chunk of data using AES-GCM.
+- **encrypt_file_to_array(file_path: str, key: bytes, chunk_size=DEFAULT_CHUNK_SIZE) -> list**: Encrypts a file into an array of encrypted chunks, with each chunk stored along with its IV and chunk ID.
+- **reconstruct_file_from_array(encrypted_chunks: list, output_file: str, key: bytes)**: Reconstructs a file from an array of encrypted chunks by decrypting each chunk and saving it in the correct order to the output file.
+    
 ## Usage Examples
 
 ### Key Generation
