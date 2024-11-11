@@ -69,6 +69,5 @@ def add_custom_headers_to_response(response):
 
 if __name__ == "__main__":
     name = load_from_config_file()["name"]
-
     generate_keys(name)
     app.run(debug=True, port=30001)
