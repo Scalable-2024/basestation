@@ -381,7 +381,6 @@ def generate_name():
     ]
 
     ipv6, ipv4 = get_ip_addresses()
-    address = None
     if ipv6:
         print(f"IPv6 address: {ipv6}")
         address = ipv6
