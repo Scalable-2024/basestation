@@ -50,31 +50,3 @@ def capture_image(ip):
         encoded_string = base64_bytes.decode()
 
     return {"status":"success","image": encoded_string, "status_code": 200}
-    
-    @router.route('/v1/update_location', methods=['POST'])
-def update_location():
-    """
-    Receives location updates from satellites.
-    Example request body:
-    {
-        "satellite_id": "satellite-group-13",
-        "location": {
-            "latitude": 40.712776,
-            "longitude": -74.005974
-        }
-    }
-    """
-    data = request.get_json()
-    satellite_id = data.get("satellite_id")
-    location = data.get("location")
-
-    if not satellite_id or not location:
-        return {"error": "Missing required fields"}, 400
-
-    if "satellite_locations" not in g:
-        g.satellite_locations = {}
-
-    g.satellite_locations[satellite_id] = location
-    print(f"Received location update from satellite {satellite_id}: {location}")
-    
-    return {"status": "Location updated successfully"}, 200
