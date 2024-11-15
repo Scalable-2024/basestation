@@ -1,3 +1,4 @@
+import argparse
 import time
 from flask import Flask, request, g
 
@@ -68,6 +69,15 @@ def add_custom_headers_to_response(response):
 
 
 if __name__ == "__main__":
-    name = load_from_config_file()["name"]
+    parser = argparse.ArgumentParser(
+        description="Bobb Satellite Parser")
+
+    parser.add_argument('--port', type=int, help='Port number')
+    args = parser.parse_args()
+
+    if not args.port:
+        exit("Port is not provided")
+
+    name = load_from_config_file("basestation", args.port)["name"]
     generate_keys(name)
-    app.run(debug=True, port=30001)
+    app.run(debug=True, port=args.port)

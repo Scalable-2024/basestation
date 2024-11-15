@@ -5,31 +5,17 @@ from typing import Optional, Tuple
 
 def get_ip_addresses() -> Tuple[Optional[str], Optional[str]]:
     """
-    Get the machine's IPv6 and IPv4 addresses.
-    Returns a tuple of (ipv6_address, ipv4_address), where either could be None if not available.
+    Get the machine's IPv4 address.
+    Returns a ipv4_address.
     """
-    ipv6_address = None
-    ipv4_address = None
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.connect(("8.8.8.8", 80))  # Google's IPv4 DNS
+    ipv4_address = sock.getsockname()[0]
+    sock.close()
 
-    try:
-        sock = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
-        sock.connect(("2001:4860:4860::8888", 80))  # Google's IPv6 DNS
-        ipv6_address = sock.getsockname()[0]
-        sock.close()
-    except:
-        pass
+    return ipv4_address
 
-    try:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        sock.connect(("8.8.8.8", 80))  # Google's IPv4 DNS
-        ipv4_address = sock.getsockname()[0]
-        sock.close()
-    except:
-        pass
-
-    return ipv6_address, ipv4_address
-
-def generate_name():
+def generate_name(port):
     left_side = [
         "admiring",
         "adoring",
@@ -380,14 +366,8 @@ def generate_name():
         "zhukovsky",
     ]
 
-    ipv6, ipv4 = get_ip_addresses()
-    if ipv6:
-        print(f"IPv6 address: {ipv6}")
-        address = ipv6
-    else:
-        print(f"IPv4 address: {ipv4}")
-        address = ipv4
+    ipv4 = get_ip_addresses()
 
     num_left = int(random() * len(left_side))
     num_right = int(random() * len(right_side))
-    return f"{left_side[num_left]}-{right_side[num_right]}-{address}"
+    return f"{left_side[num_left]}-{right_side[num_right]}-{ipv4}:{port}"
