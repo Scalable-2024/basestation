@@ -1,7 +1,21 @@
-import json
+import socket
 from random import random
+from typing import Optional, Tuple
 
-def generate_name():
+
+def get_ip_addresses() -> Tuple[Optional[str], Optional[str]]:
+    """
+    Get the machine's IPv4 address.
+    Returns a ipv4_address.
+    """
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.connect(("8.8.8.8", 80))  # Google's IPv4 DNS
+    ipv4_address = sock.getsockname()[0]
+    sock.close()
+
+    return ipv4_address
+
+def generate_name(port):
     left_side = [
         "admiring",
         "adoring",
@@ -352,6 +366,8 @@ def generate_name():
         "zhukovsky",
     ]
 
+    ipv4 = get_ip_addresses()
+
     num_left = int(random() * len(left_side))
     num_right = int(random() * len(right_side))
-    return f"{left_side[num_left]}-{right_side[num_right]}"
+    return f"{left_side[num_left]}-{right_side[num_right]}-{ipv4}:{port}"
